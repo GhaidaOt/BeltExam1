@@ -8,11 +8,18 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private float playerHealth;
     [SerializeField] GameObject gameOver;
+    [SerializeField] GameObject win;
+
     public PlayerMovement pm;
+    [SerializeField] Image healthBar;
+
 
     private void Update()
     {
-        if(playerHealth <= 0)
+
+        healthBar.fillAmount = playerHealth;
+
+        if (playerHealth <= 0)
         {
             gameOver.SetActive(true);
             pm.enabled = false;
@@ -25,6 +32,12 @@ public class PlayerHealth : MonoBehaviour
         {
             playerHealth -= 1/3f;
 
+        }
+
+        if (collision.gameObject.CompareTag("Goal"))
+        {
+            win.SetActive(true);
+            pm.enabled = false;
         }
     }
 }
