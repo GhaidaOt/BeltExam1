@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float playerHealth;
     [SerializeField] GameObject gameOver;
     [SerializeField] GameObject win;
-
+    [SerializeField] Transform spawn;
     public PlayerMovement pm;
     [SerializeField] Image healthBar;
 
@@ -23,6 +23,14 @@ public class PlayerHealth : MonoBehaviour
         {
             gameOver.SetActive(true);
             pm.enabled = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Respawn"))
+        {
+            transform.position = spawn.position;
         }
     }
 
